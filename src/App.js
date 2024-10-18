@@ -1,5 +1,5 @@
 function App() {
-  return <div>hello git</div>;
+  return <div>hello tako</div>;
 }
 
 export default App;
