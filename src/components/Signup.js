@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+  const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -6,7 +10,13 @@ export default function Signup() {
     const acquisitionChannel = fd.getAll("acquisition"); //კითხულობს ფორმის ყველა ველს, რომელსაც აქვს name="acquisition", და დაგვიბრუნებს მასივს
     const data = Object.fromEntries(fd.entries()); // ვრცელდება ობიექტად
     data.acquisition = acquisitionChannel;
-    console.log(data); // ბეჭდავს ყველა ველს და მის მნიშვნელობებს
+
+    if (data.password !== data["confirm-password"]) {
+      setPasswordsAreNotEqual(true);
+      return;
+    }
+
+    console.log(data);
 
     // e.target.reset();
   }
@@ -40,6 +50,9 @@ export default function Signup() {
             name="confirm-password"
             required
           />
+          <div className="control-error">
+            {passwordsAreNotEqual && <p>Passwords must match.</p>}
+          </div>
         </div>
       </div>
 
