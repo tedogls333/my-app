@@ -2,11 +2,13 @@ export default function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const fd = new FormData(e.target);
-    const acquisitionChannel = fd.getAll("acquisition");
-    const data = Object.fromEntries(fd.entries());
+    const fd = new FormData(e.target); // FormData იღებს ფორმის ყველა მონაცემს
+    const acquisitionChannel = fd.getAll("acquisition"); //კითხულობს ფორმის ყველა ველს, რომელსაც აქვს name="acquisition", და დაგვიბრუნებს მასივს
+    const data = Object.fromEntries(fd.entries()); // ვრცელდება ობიექტად
     data.acquisition = acquisitionChannel;
-    console.log(data);
+    console.log(data); // ბეჭდავს ყველა ველს და მის მნიშვნელობებს
+
+    // e.target.reset();
   }
   return (
     <form onSubmit={handleSubmit}>
